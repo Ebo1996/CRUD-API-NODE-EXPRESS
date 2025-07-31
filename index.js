@@ -13,7 +13,8 @@ app.get('/', (req, res) => {
 app.get('/api/product/:id', async (req, res) => {
 
   try {
-    res.status(200).json(await Product.findById(req.params.id));
+    const product = await Product.findById(req.params.id);
+    res.status(200).json(product);
   }
   catch (error) {
     res.status(500).json({ message: error.message });
@@ -39,6 +40,14 @@ app.post('/api/products', async (req, res) => {
   }
 });
 
+app.put('/api/products/:id', async (req, res) => {
+  try {
+    const product = await Product.findByIdAndUpdate(req.params.id, req.body,);
+    res.status(200).json(product);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
 
 
 mongoose.connect("mongodb+srv://ebisaberhanu1996:u0eVtJQ0hTb4t5a6@crud.io8xdkz.mongodb.net/Node-API?retryWrites=true&w=majority&appName=CRUD")
