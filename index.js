@@ -10,6 +10,16 @@ app.get('/', (req, res) => {
   res.send('Hello from Node API Server');
 });
 
+app.get('/api/product/:id', async (req, res) => {
+
+  try {
+    res.status(200).json(await Product.findById(req.params.id));
+  }
+  catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
 app.get('/api/products', async (req, res) => {
   try {
     const products = await Product.find();
