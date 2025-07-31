@@ -1,6 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const Product
+const Product = require('./models/product.model.js');
 const app = express();
 const port = 3000;
 
@@ -9,7 +9,21 @@ app.use(express.json());
 app.get('/', (req, res) => {
   res.send('Hello from Node API Server');
 });
-app.post('/api/products', (req, res) => { res.send(req.body) });
+app.post('/api/products', async (req, res) => {
+  const product = await Product.create(req.body);
+  res.status(200).json(product);
+  try {
+
+  }
+  catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+
+
+
+
+
+});
 
 
 mongoose.connect("mongodb+srv://ebisaberhanu1996:u0eVtJQ0hTb4t5a6@crud.io8xdkz.mongodb.net/Node-API?retryWrites=true&w=majority&appName=CRUD")
