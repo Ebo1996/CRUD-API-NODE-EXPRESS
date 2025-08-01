@@ -4,23 +4,44 @@ const Product = require('./models/product.model.js');
 const app = express();
 const port = 3000;
 
+// Middleware
 app.use(express.json());
 
+// Root route
 app.get('/', (req, res) => {
   res.send('Hello from Node API Server');
 });
 
-app.get('/api/product/:id', async (req, res) => {
-
+// Update product by ID
+app.put('/api/product/:id', async (req, res) => {
   try {
-    const product = await Product.findById(req.params.id);
+    const { id } = req.params;
+    const product = await Product.findByIdAndUpdate(id, req.body, { new: true });
+
+    if (!product) {
+      return res.status(404).json({ message: 'Product not found' });
+    }
+    const updateProduct = await Product.findByIdAndUpdate(id, req
     res.status(200).json(product);
-  }
-  catch (error) {
+  } catch (error) {
     res.status(500).json({ message: error.message });
   }
 });
 
+// Get a single product by ID
+app.get('/api/product/:id', async (req, res) => {
+  try {
+    const product = await Product.findById(req.params.id);
+    if (!product) {
+      return res.status(404).json({ message: 'Product not found' });
+    }
+    res.status(200).json(product);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+// Get all products
 app.get('/api/products', async (req, res) => {
   try {
     const products = await Product.find();
@@ -30,32 +51,24 @@ app.get('/api/products', async (req, res) => {
   }
 });
 
-
+// Create a new product
 app.post('/api/products', async (req, res) => {
   try {
     const product = await Product.create(req.body);
-    res.status(200).json(product);
+    res.status(201).json(product);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 });
 
-app.put('/api/products/:id', async (req, res) => {
-  try {
-    const product = await Product.findByIdAndUpdate(req.params.id, req.body,);
-    res.status(200).json(product);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-});
-
-
-mongoose.connect("mongodb+srv://ebisaberhanu1996:u0eVtJQ0hTb4t5a6@crud.io8xdkz.mongodb.net/Node-API?retryWrites=true&w=majority&appName=CRUD")
-  .then(() => console.log('Connected to MongoDB!'))
-  .catch((err) => console.error('MongoDB connection error:', err));
-
-
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
-});
-t
+// Connect to MongoDB and start the server
+mongoose.connect("mongodb+srv://ebisaberhanu1996:WX4kT1omkWpBil06@crud.io8xdkz.mongodb.net/Node-API?retryWrites=true&w=majority")
+  .then(() => {
+    console.log('Connected to MongoDB!');
+    app.listen(port, () => {
+      console.log(`Example app listening on port ${port}`);
+    });
+  })
+  .catch((err) => {
+    console.error('MongoDB connection error:', err);
+  });
