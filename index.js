@@ -21,7 +21,7 @@ app.put('/api/product/:id', async (req, res) => {
     if (!product) {
       return res.status(404).json({ message: 'Product not found' });
     }
-    const updateProduct = await Product.findByIdAndUpdate(id, req
+    const updateProduct = await Product.findById(id);
     res.status(200).json(product);
   } catch (error) {
     res.status(500).json({ message: error.message });
