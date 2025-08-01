@@ -12,13 +12,12 @@ A simple CRUD API for managing products using **Node.js**, **Express**, and **Mo
 ## 📂 Project Structure
 
 simple-crud-API/
-├── controllers/ # Handles business logic
+├── controllers/
 │ └── product.controller.js
-├── models/ # Mongoose schemas
+├── models/ 
 │ └── product.model.js
-├── routes/ # Route definitions
-│ └── product.route.js
-├── server.js # Main server entry point
+├── routes/ 
+├── server.js 
 └── README.md
 
 yaml
