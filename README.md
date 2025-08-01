@@ -20,17 +20,12 @@ simple-crud-API/
 ├── server.js 
 └── README.md
 
-yaml
-Copy
-Edit
 
----
+🚀 Getting Started
 
-## 🚀 Getting Started
+ 1. Clone the Repository
 
-### 1. Clone the Repository
-
-```bash
+`
 git clone https://github.com/Ebo1996/simple-crud-API.git
 cd simple-crud-API
 2. Install Dependencies
