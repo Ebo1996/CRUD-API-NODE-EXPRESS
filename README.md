@@ -25,7 +25,6 @@ simple-crud-API/
 
  1. Clone the Repository
 
-`
 git clone https://github.com/Ebo1996/simple-crud-API.git
 cd simple-crud-API
 2. Install Dependencies
