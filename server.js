@@ -8,6 +8,7 @@ const port = 3000;
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
+
 // Routes
 app.use('/api/products', productRoute);
 
