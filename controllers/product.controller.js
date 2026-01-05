@@ -13,6 +13,7 @@ exports.createProduct = async (req, res) => {
 
 
 
+
 // Get All Products
 exports.getAllProducts = async (req, res) => {
   try {
